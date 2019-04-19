@@ -1,0 +1,71 @@
+<Toolbar_sportstore-root [countSwitch]="countToToolbar"></Toolbar_sportstore-root>
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+      
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+              
+    <!-- name Column -->
+        <ng-container matColumnDef="items">
+            <th class="items" mat-header-cell *matHeaderCellDef mat-sort-header> Items </th>
+            <td class="items" mat-cell *matCellDef="let row">
+                <div class="shopping_card_all">  
+                <mat-card class="shopping_card">
+                    <mat-card-content class="flexbox-conteiner">
+                        <div class="flexbox-child1">
+                            <img mat-card-image src="https://liketo.ru/upload/iblock/b42/6835.10_3_tif_1000x1000.jpg">
+                        </div>
+                        <div class="flexbox-child2">
+                            <div class="child-header">
+                                <span>
+                                    Name: {{row.name}}
+                                </span>
+                            </div>            
+                            <div>
+                                <span>
+                                    Description: {{row.description}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flexbox-child3">
+                            <div class="child-header">
+                                <span>
+                                    Category: {{row.category}}
+                                </span>
+                            </div>
+                            <div>
+                                <span>
+                                    Cost: {{row.price}}
+                                </span>                
+                            </div>            
+                            <div class="flexbox-space">
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            </td>
+        </ng-container>
+
+    <!-- action Column -->
+        <ng-container matColumnDef="action">
+            <th class="price" mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+            <td class="price" mat-cell *matCellDef="let row">
+                <button mat-icon-button (click)="removeItem(row.name)">
+                    <mat-icon>
+                        delete_forever
+                    </mat-icon>
+                </button>
+            </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+      
+    <mat-paginator [pageSizeOptions]="[3, 5, 7]"></mat-paginator>
+</div>
+<span>
+    {{cartCost}}
+</span>
